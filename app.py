@@ -248,7 +248,6 @@ with tab4:
     forecast_df = get_next_forecast_months(df_with_sales, n_months=3)
     
     # Engineer features for forecast
-    forecast_df['Date_orig'] = forecast_df['Date']
     forecast_df = engineer_features(forecast_df)
     
     # Prepare forecast features (same as training)

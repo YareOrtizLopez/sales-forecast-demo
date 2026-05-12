@@ -21,7 +21,7 @@ def load_marketing_spend(filepath: str) -> pd.DataFrame:
         raise ValueError(f"Missing required columns: {missing}")
     
     # Convert Date to datetime
-    df['Date'] = pd.to_datetime(df['Date'])
+    df['Date'] = pd.to_datetime(df['Date']).dt.normalize()
     
     # Sort by date
     df = df.sort_values('Date').reset_index(drop=True)

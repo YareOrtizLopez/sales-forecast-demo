@@ -28,13 +28,13 @@ def engineer_features(df: pd.DataFrame) -> pd.DataFrame:
     
     # 3-month moving average of spend (handles noise)
     df['Spend_MA3'] = df['Marketing_Spend'].rolling(window=3, center=True).mean()
-    # Forward-fill first 2 rows, back-fill last row
-    df['Spend_MA3'].fillna(method='bfill', inplace=True)
-    df['Spend_MA3'].fillna(method='ffill', inplace=True)
+    # Forward-fill first 2 rows, back-fill last row (modern pandas syntax)
+    df['Spend_MA3'] = df['Spend_MA3'].bfill()
+    df['Spend_MA3'] = df['Spend_MA3'].ffill()
     
     # Lagged spend (previous month)
     df['Spend_Lag1'] = df['Marketing_Spend'].shift(1)
-    df['Spend_Lag1'].fillna(df['Marketing_Spend'].iloc[0], inplace=True)
+    df['Spend_Lag1'] = df['Spend_Lag1'].fillna(df['Marketing_Spend'].iloc[0])
     
     return df
 
